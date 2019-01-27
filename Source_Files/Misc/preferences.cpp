@@ -2765,24 +2765,29 @@ static void environment_dialog(void *arg)
 	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
 	table->col_flags(0, placeable::kAlignRight);
 	
+	w_env_select* map_w = nullptr; // HACK HACK to expose map_w outside the target scope
+	w_env_select* physics_w = nullptr; // HACK HACK to expose physics_w outside the target scope
+	w_env_select* shapes_w = nullptr; // HACK HACK to expose shapes_w outside the target scope
+	w_env_select* sounds_w = nullptr; // HACK HACK to expose sounds_w outside the target scope
+	w_env_select* resources_w = nullptr; // HACK HACK to expose resources_w outside the target scope
 	if (!PlatformIsMacAppStore()) {
-		w_env_select *map_w = new w_env_select(environment_preferences->map_file, "AVAILABLE MAPS", _typecode_scenario, &d);
+		map_w = new w_env_select(environment_preferences->map_file, "AVAILABLE MAPS", _typecode_scenario, &d);
 		table->dual_add(map_w->label("Map"), d);
 		table->dual_add(map_w, d);
 		
-		w_env_select *physics_w = new w_env_select(environment_preferences->physics_file, "AVAILABLE PHYSICS MODELS", _typecode_physics, &d);
+		physics_w = new w_env_select(environment_preferences->physics_file, "AVAILABLE PHYSICS MODELS", _typecode_physics, &d);
 		table->dual_add(physics_w->label("Physics"), d);
 		table->dual_add(physics_w, d);
 
-		w_env_select *shapes_w = new w_env_select(environment_preferences->shapes_file, "AVAILABLE SHAPES", _typecode_shapes, &d);
+		shapes_w = new w_env_select(environment_preferences->shapes_file, "AVAILABLE SHAPES", _typecode_shapes, &d);
 		table->dual_add(shapes_w->label("Shapes"), d);
 		table->dual_add(shapes_w, d);
 
-		w_env_select *sounds_w = new w_env_select(environment_preferences->sounds_file, "AVAILABLE SOUNDS", _typecode_sounds, &d);
+		sounds_w = new w_env_select(environment_preferences->sounds_file, "AVAILABLE SOUNDS", _typecode_sounds, &d);
 		table->dual_add(sounds_w->label("Sounds"), d);
 		table->dual_add(sounds_w, d);
 
-		w_env_select* resources_w = new w_env_select(environment_preferences->resources_file, "AVAILABLE FILES", _typecode_unknown, &d);
+		 resources_w = new w_env_select(environment_preferences->resources_file, "AVAILABLE FILES", _typecode_unknown, &d);
 		table->dual_add(resources_w->label("External Resources"), d);
 		table->dual_add(resources_w, d);
 	}
@@ -2790,14 +2795,16 @@ static void environment_dialog(void *arg)
 	table->add_row(new w_spacer, true);
 	table->dual_add_row(new w_button("PLUGINS", plugins_dialog, &d), d);
 
+	w_enabling_toggle* use_solo_lua_w = nullptr; // HACK HACK to expose use_solo_lua_w outside the scope
+	w_file_chooser* solo_lua_w = nullptr; // HACK HACK to expose use_solo_lua_w outside the scope
 	if (!PlatformIsMacAppStore()) {
 		table->add_row(new w_spacer, true);
 		table->dual_add_row(new w_static_text("Solo Script"), d);
-		w_enabling_toggle* use_solo_lua_w = new w_enabling_toggle(environment_preferences->use_solo_lua);
+		use_solo_lua_w = new w_enabling_toggle(environment_preferences->use_solo_lua);
 		table->dual_add(use_solo_lua_w->label("Use Solo Script"), d);
 		table->dual_add(use_solo_lua_w, d);
 
-		w_file_chooser *solo_lua_w = new w_file_chooser("Choose Script", _typecode_netscript);
+		solo_lua_w = new w_file_chooser("Choose Script", _typecode_netscript);
 		solo_lua_w->set_file(environment_preferences->solo_lua_file);
 		table->dual_add(solo_lua_w->label("Script File"), d);
 		table->dual_add(solo_lua_w, d);
@@ -2811,12 +2818,14 @@ static void environment_dialog(void *arg)
 	table->dual_add(film_profile_w->label("Default Playback Profile"), d);
 	table->dual_add(film_profile_w, d);
 	
+	w_enabling_toggle *use_replay_net_lua_w = nullptr;
+	w_file_chooser *replay_net_lua_w = nullptr;
 	if (!PlatformIsMacAppStore()) {
-		w_enabling_toggle* use_replay_net_lua_w = new w_enabling_toggle(environment_preferences->use_replay_net_lua);
+		use_replay_net_lua_w = new w_enabling_toggle(environment_preferences->use_replay_net_lua);
 		table->dual_add(use_replay_net_lua_w->label("Use Netscript in Films"), d);
 		table->dual_add(use_replay_net_lua_w, d);
 		
-		w_file_chooser *replay_net_lua_w = new w_file_chooser("Choose Script", _typecode_netscript);
+		replay_net_lua_w = new w_file_chooser("Choose Script", _typecode_netscript);
 		replay_net_lua_w->set_file(network_preferences->netscript_file);
 		table->dual_add(replay_net_lua_w->label("Netscript File"), d);
 		table->dual_add(replay_net_lua_w, d);
@@ -2825,9 +2834,9 @@ static void environment_dialog(void *arg)
 	
 	table->add_row(new w_spacer, true);
 	table->dual_add_row(new w_static_text("Options"), d);
-
+	w_toggle *hide_extensions_w = nullptr;
 	if (!PlatformIsMacAppStore()) {
-		w_toggle *hide_extensions_w = new w_toggle(environment_preferences->hide_extensions);
+		hide_extensions_w = new w_toggle(environment_preferences->hide_extensions);
 		table->dual_add(hide_extensions_w->label("Hide File Extensions"), d);
 		table->dual_add(hide_extensions_w, d);
 	}
