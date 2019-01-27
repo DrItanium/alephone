@@ -218,26 +218,26 @@ public:
 	// Results:
 	
 	// Various texture ID's:
-	short GetCollection() {return Collection;}
-	short GetCTable() {return CTable;}
-	short GetFrame() {return Frame;}
-	short GetBitmap() {return Bitmap;}
+	short GetCollection() const {return Collection;}
+	short GetCTable() const {return CTable;}
+	short GetFrame() const {return Frame;}
+	short GetBitmap() const {return Bitmap;}
 
 	// Info transmitted from the setting-up phase:
 	// texture type, whether it is glowmapped,
 	// and whether the textures are blended rather than all-or-nothing crisp-edged
-	int GetTextureType() {return TextureType;}	
-	bool IsGlowMapped() {return IsGlowing;}
-	bool IsBlended() {return (TxtrOptsPtr->OpacityType != OGL_OpacType_Crisp);}
-	bool VoidVisible() {return (TxtrOptsPtr->VoidVisible);}
+	int GetTextureType() const {return TextureType;}	
+	bool IsGlowMapped() const {return IsGlowing;}
+	bool IsBlended() const {return (TxtrOptsPtr->OpacityType != OGL_OpacType_Crisp);}
+	bool VoidVisible() const {return (TxtrOptsPtr->VoidVisible);}
 	short NormalBlend() {return (TxtrOptsPtr->NormalBlend) + ((NormalImage.get() && NormalImage.get()->IsPremultiplied() && TxtrOptsPtr->NormalBlend < OGL_FIRST_PREMULT_ALPHA) ? OGL_FIRST_PREMULT_ALPHA : 0); }
 	short GlowBlend() {return (TxtrOptsPtr->GlowBlend) + ((GlowImage.get() && GlowImage.get()->IsPremultiplied() && TxtrOptsPtr->GlowBlend < OGL_FIRST_PREMULT_ALPHA) ? OGL_FIRST_PREMULT_ALPHA : 0); }
-	float MinGlowIntensity() {return (TxtrOptsPtr->MinGlowIntensity);}
-	float BloomScale() {return (TxtrOptsPtr->BloomScale);}
-	float BloomShift() {return (TxtrOptsPtr->BloomShift);}
-	float GlowBloomScale() {return (TxtrOptsPtr->GlowBloomScale);}
-	float GlowBloomShift() {return (TxtrOptsPtr->GlowBloomShift);}
-	float LandscapeBloom() {return (TxtrOptsPtr->LandscapeBloom);}
+	float MinGlowIntensity() const {return (TxtrOptsPtr->MinGlowIntensity);}
+	float BloomScale() const {return (TxtrOptsPtr->BloomScale);}
+	float BloomShift() const {return (TxtrOptsPtr->BloomShift);}
+	float GlowBloomScale() const {return (TxtrOptsPtr->GlowBloomScale);}
+	float GlowBloomShift() const {return (TxtrOptsPtr->GlowBloomShift);}
+	float LandscapeBloom() const {return (TxtrOptsPtr->LandscapeBloom);}
 	
 	// Scaling and offset of the current texture;
 	// important for sprites, which will be padded to make them OpenGL-friendly.
