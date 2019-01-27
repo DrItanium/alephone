@@ -57,6 +57,14 @@ constexpr bool PlatformIsLittleEndian() noexcept {
 	return false;
 #endif // end ALEPHONE_LITTLE_ENDIAN
 }
+
+constexpr bool PlatformIsMacAppStore() noexcept {
+#ifdef MAC_APP_STORE
+	return true;
+#else
+	return false;
+#endif
+}
 /*
  *  Data types with specific bit width
  */
