@@ -100,8 +100,8 @@ public:
 	void save_cache();
 	void set_cache_autosave(bool enabled) { m_autosave = enabled; }
 	
-	size_t size() { return m_cachesize; }
-	size_t limit() { return m_sizelimit; }
+	size_t size() const { return m_cachesize; }
+	size_t limit() const { return m_sizelimit; }
 	void set_limit(size_t bytes) { m_sizelimit = bytes; if (apply_cache_limit()) autosave_cache(); }
 	
 
