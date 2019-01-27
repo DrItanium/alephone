@@ -2765,44 +2765,44 @@ static void environment_dialog(void *arg)
 	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
 	table->col_flags(0, placeable::kAlignRight);
 	
-#ifndef MAC_APP_STORE
-	w_env_select *map_w = new w_env_select(environment_preferences->map_file, "AVAILABLE MAPS", _typecode_scenario, &d);
-	table->dual_add(map_w->label("Map"), d);
-	table->dual_add(map_w, d);
-	
-	w_env_select *physics_w = new w_env_select(environment_preferences->physics_file, "AVAILABLE PHYSICS MODELS", _typecode_physics, &d);
-	table->dual_add(physics_w->label("Physics"), d);
-	table->dual_add(physics_w, d);
+	if (!PlatformIsMacAppStore()) {
+		w_env_select *map_w = new w_env_select(environment_preferences->map_file, "AVAILABLE MAPS", _typecode_scenario, &d);
+		table->dual_add(map_w->label("Map"), d);
+		table->dual_add(map_w, d);
+		
+		w_env_select *physics_w = new w_env_select(environment_preferences->physics_file, "AVAILABLE PHYSICS MODELS", _typecode_physics, &d);
+		table->dual_add(physics_w->label("Physics"), d);
+		table->dual_add(physics_w, d);
 
-	w_env_select *shapes_w = new w_env_select(environment_preferences->shapes_file, "AVAILABLE SHAPES", _typecode_shapes, &d);
-	table->dual_add(shapes_w->label("Shapes"), d);
-	table->dual_add(shapes_w, d);
+		w_env_select *shapes_w = new w_env_select(environment_preferences->shapes_file, "AVAILABLE SHAPES", _typecode_shapes, &d);
+		table->dual_add(shapes_w->label("Shapes"), d);
+		table->dual_add(shapes_w, d);
 
-	w_env_select *sounds_w = new w_env_select(environment_preferences->sounds_file, "AVAILABLE SOUNDS", _typecode_sounds, &d);
-	table->dual_add(sounds_w->label("Sounds"), d);
-	table->dual_add(sounds_w, d);
+		w_env_select *sounds_w = new w_env_select(environment_preferences->sounds_file, "AVAILABLE SOUNDS", _typecode_sounds, &d);
+		table->dual_add(sounds_w->label("Sounds"), d);
+		table->dual_add(sounds_w, d);
 
-	w_env_select* resources_w = new w_env_select(environment_preferences->resources_file, "AVAILABLE FILES", _typecode_unknown, &d);
-	table->dual_add(resources_w->label("External Resources"), d);
-	table->dual_add(resources_w, d);
-#endif
+		w_env_select* resources_w = new w_env_select(environment_preferences->resources_file, "AVAILABLE FILES", _typecode_unknown, &d);
+		table->dual_add(resources_w->label("External Resources"), d);
+		table->dual_add(resources_w, d);
+	}
 
 	table->add_row(new w_spacer, true);
 	table->dual_add_row(new w_button("PLUGINS", plugins_dialog, &d), d);
 
-#ifndef MAC_APP_STORE
-	table->add_row(new w_spacer, true);
-	table->dual_add_row(new w_static_text("Solo Script"), d);
-	w_enabling_toggle* use_solo_lua_w = new w_enabling_toggle(environment_preferences->use_solo_lua);
-	table->dual_add(use_solo_lua_w->label("Use Solo Script"), d);
-	table->dual_add(use_solo_lua_w, d);
+	if (!PlatformIsMacAppStore()) {
+		table->add_row(new w_spacer, true);
+		table->dual_add_row(new w_static_text("Solo Script"), d);
+		w_enabling_toggle* use_solo_lua_w = new w_enabling_toggle(environment_preferences->use_solo_lua);
+		table->dual_add(use_solo_lua_w->label("Use Solo Script"), d);
+		table->dual_add(use_solo_lua_w, d);
 
-	w_file_chooser *solo_lua_w = new w_file_chooser("Choose Script", _typecode_netscript);
-	solo_lua_w->set_file(environment_preferences->solo_lua_file);
-	table->dual_add(solo_lua_w->label("Script File"), d);
-	table->dual_add(solo_lua_w, d);
-	use_solo_lua_w->add_dependent_widget(solo_lua_w);
-#endif
+		w_file_chooser *solo_lua_w = new w_file_chooser("Choose Script", _typecode_netscript);
+		solo_lua_w->set_file(environment_preferences->solo_lua_file);
+		table->dual_add(solo_lua_w->label("Script File"), d);
+		table->dual_add(solo_lua_w, d);
+		use_solo_lua_w->add_dependent_widget(solo_lua_w);
+	}
 
 	table->add_row(new w_spacer, true);
 	table->dual_add_row(new w_static_text("Film Playback"), d);
@@ -2811,26 +2811,26 @@ static void environment_dialog(void *arg)
 	table->dual_add(film_profile_w->label("Default Playback Profile"), d);
 	table->dual_add(film_profile_w, d);
 	
-#ifndef MAC_APP_STORE
-	w_enabling_toggle* use_replay_net_lua_w = new w_enabling_toggle(environment_preferences->use_replay_net_lua);
-	table->dual_add(use_replay_net_lua_w->label("Use Netscript in Films"), d);
-	table->dual_add(use_replay_net_lua_w, d);
-	
-	w_file_chooser *replay_net_lua_w = new w_file_chooser("Choose Script", _typecode_netscript);
-	replay_net_lua_w->set_file(network_preferences->netscript_file);
-	table->dual_add(replay_net_lua_w->label("Netscript File"), d);
-	table->dual_add(replay_net_lua_w, d);
-	use_replay_net_lua_w->add_dependent_widget(replay_net_lua_w);
-#endif
+	if (!PlatformIsMacAppStore()) {
+		w_enabling_toggle* use_replay_net_lua_w = new w_enabling_toggle(environment_preferences->use_replay_net_lua);
+		table->dual_add(use_replay_net_lua_w->label("Use Netscript in Films"), d);
+		table->dual_add(use_replay_net_lua_w, d);
+		
+		w_file_chooser *replay_net_lua_w = new w_file_chooser("Choose Script", _typecode_netscript);
+		replay_net_lua_w->set_file(network_preferences->netscript_file);
+		table->dual_add(replay_net_lua_w->label("Netscript File"), d);
+		table->dual_add(replay_net_lua_w, d);
+		use_replay_net_lua_w->add_dependent_widget(replay_net_lua_w);
+	}
 	
 	table->add_row(new w_spacer, true);
 	table->dual_add_row(new w_static_text("Options"), d);
 
-#ifndef MAC_APP_STORE
-	w_toggle *hide_extensions_w = new w_toggle(environment_preferences->hide_extensions);
-	table->dual_add(hide_extensions_w->label("Hide File Extensions"), d);
-	table->dual_add(hide_extensions_w, d);
-#endif
+	if (!PlatformIsMacAppStore()) {
+		w_toggle *hide_extensions_w = new w_toggle(environment_preferences->hide_extensions);
+		table->dual_add(hide_extensions_w->label("Hide File Extensions"), d);
+		table->dual_add(hide_extensions_w, d);
+	}
 
 	w_select *max_saves_w = new w_select(0, max_saves_labels);
 	for (int i = 0; max_saves_labels[i] != NULL; ++i) {
@@ -2868,68 +2868,68 @@ static void environment_dialog(void *arg)
 	if (d.run() == 0) {	// Accepted
 		bool changed = false;
 
-#ifndef MAC_APP_STORE
-		const char *path = map_w->get_path();
-		if (strcmp(path, environment_preferences->map_file)) {
-			strncpy(environment_preferences->map_file, path, 256);
-			environment_preferences->map_checksum = read_wad_file_checksum(map_w->get_file_specifier());
-			changed = true;
-		}
+		if (!PlatformIsMacAppStore()) {
+			const char *path = map_w->get_path();
+			if (strcmp(path, environment_preferences->map_file)) {
+				strncpy(environment_preferences->map_file, path, 256);
+				environment_preferences->map_checksum = read_wad_file_checksum(map_w->get_file_specifier());
+				changed = true;
+			}
 
-		path = physics_w->get_path();
-		if (strcmp(path, environment_preferences->physics_file)) {
-			strncpy(environment_preferences->physics_file, path, 256);
-			environment_preferences->physics_checksum = read_wad_file_checksum(physics_w->get_file_specifier());
-			changed = true;
-		}
+			path = physics_w->get_path();
+			if (strcmp(path, environment_preferences->physics_file)) {
+				strncpy(environment_preferences->physics_file, path, 256);
+				environment_preferences->physics_checksum = read_wad_file_checksum(physics_w->get_file_specifier());
+				changed = true;
+			}
 
-		path = shapes_w->get_path();
-		if (strcmp(path, environment_preferences->shapes_file)) {
-			strncpy(environment_preferences->shapes_file, path, 256);
-			environment_preferences->shapes_mod_date = shapes_w->get_file_specifier().GetDate();
-			changed = true;
-		}
+			path = shapes_w->get_path();
+			if (strcmp(path, environment_preferences->shapes_file)) {
+				strncpy(environment_preferences->shapes_file, path, 256);
+				environment_preferences->shapes_mod_date = shapes_w->get_file_specifier().GetDate();
+				changed = true;
+			}
 
-		path = sounds_w->get_path();
-		if (strcmp(path, environment_preferences->sounds_file)) {
-			strncpy(environment_preferences->sounds_file, path, 256);
-			environment_preferences->sounds_mod_date = sounds_w->get_file_specifier().GetDate();
-			changed = true;
-		}
-		
-		path = resources_w->get_path();
-		if (strcmp(path, environment_preferences->resources_file) != 0)
-		{
-			strncpy(environment_preferences->resources_file, path, 256);
-			changed = true;
-		}
-		
-		bool use_solo_lua = use_solo_lua_w->get_selection() != 0;
-		if (use_solo_lua != environment_preferences->use_solo_lua)
-		{
-			environment_preferences->use_solo_lua = use_solo_lua;
-			changed = true;
-		}
-		
-		path = solo_lua_w->get_file().GetPath();
-		if (strcmp(path, environment_preferences->solo_lua_file)) {
-			strncpy(environment_preferences->solo_lua_file, path, 256);
-			changed = true;
-		}
+			path = sounds_w->get_path();
+			if (strcmp(path, environment_preferences->sounds_file)) {
+				strncpy(environment_preferences->sounds_file, path, 256);
+				environment_preferences->sounds_mod_date = sounds_w->get_file_specifier().GetDate();
+				changed = true;
+			}
+			
+			path = resources_w->get_path();
+			if (strcmp(path, environment_preferences->resources_file) != 0)
+			{
+				strncpy(environment_preferences->resources_file, path, 256);
+				changed = true;
+			}
+			
+			bool use_solo_lua = use_solo_lua_w->get_selection() != 0;
+			if (use_solo_lua != environment_preferences->use_solo_lua)
+			{
+				environment_preferences->use_solo_lua = use_solo_lua;
+				changed = true;
+			}
+			
+			path = solo_lua_w->get_file().GetPath();
+			if (strcmp(path, environment_preferences->solo_lua_file)) {
+				strncpy(environment_preferences->solo_lua_file, path, 256);
+				changed = true;
+			}
 
-		bool use_replay_net_lua = use_replay_net_lua_w->get_selection() != 0;
-		if (use_replay_net_lua != environment_preferences->use_replay_net_lua)
-		{
-			environment_preferences->use_replay_net_lua = use_replay_net_lua;
-			changed = true;
+			bool use_replay_net_lua = use_replay_net_lua_w->get_selection() != 0;
+			if (use_replay_net_lua != environment_preferences->use_replay_net_lua)
+			{
+				environment_preferences->use_replay_net_lua = use_replay_net_lua;
+				changed = true;
+			}
+			
+			path = replay_net_lua_w->get_file().GetPath();
+			if (strcmp(path, network_preferences->netscript_file)) {
+				strncpy(network_preferences->netscript_file, path, 256);
+				changed = true;
+			}
 		}
-		
-		path = replay_net_lua_w->get_file().GetPath();
-		if (strcmp(path, network_preferences->netscript_file)) {
-			strncpy(network_preferences->netscript_file, path, 256);
-			changed = true;
-		}
-#endif
 		
 		FileSpecifier new_theme;
 		theme_plugin = Plugins::instance()->find_theme();
@@ -2943,14 +2943,14 @@ static void environment_dialog(void *arg)
 			theme_changed = true;
 		}
 
-#ifndef MAC_APP_STORE
-		bool hide_extensions = hide_extensions_w->get_selection() != 0;
-		if (hide_extensions != environment_preferences->hide_extensions)
-		{
-			environment_preferences->hide_extensions = hide_extensions;
-			changed = true;
+		if (!PlatformIsMacAppStore()) {
+			bool hide_extensions = hide_extensions_w->get_selection() != 0;
+			if (hide_extensions != environment_preferences->hide_extensions)
+			{
+				environment_preferences->hide_extensions = hide_extensions;
+				changed = true;
+			}
 		}
-#endif
 
 		if (film_profile_w->get_selection() != environment_preferences->film_profile)
 		{
