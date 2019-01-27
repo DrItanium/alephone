@@ -101,7 +101,7 @@ public:
 	OpenedFile();
 	~OpenedFile() {Close();}	// Auto-close when destroying
 
-	int GetError() {return err;}
+	int GetError() const {return err;}
 	SDL_RWops *GetRWops() {return f;}
 	SDL_RWops *TakeRWops();		// Hand over SDL_RWops
 
@@ -202,7 +202,7 @@ public:
 	OpenedResourceFile();
 	~OpenedResourceFile() {Close();}	// Auto-close when destroying
 
-	int GetError() {return err;}
+	int GetError() const {return err;}
 
 private:
 	int err;		// Error code
