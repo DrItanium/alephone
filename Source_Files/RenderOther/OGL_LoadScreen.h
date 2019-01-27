@@ -46,7 +46,7 @@ public:
 	void Set(std::string Path, bool Stretch, bool Scale, short X, short Y, short W, short H);
 	void Clear();
 
-	bool Use() { return use; }
+	bool Use() const { return use; }
 
 	rgb_color *Colors() { return colors; }
 

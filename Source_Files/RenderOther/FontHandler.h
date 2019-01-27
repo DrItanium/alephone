@@ -132,7 +132,7 @@ public:
 	// if OGL_Texture is NULL, then there is no OpenGL font texture to render.
 	uint8 *OGL_Texture;
 	short TxtrWidth, TxtrHeight;
-	int GetTxtrSize() {return int(TxtrWidth)*int(TxtrHeight);}
+	int GetTxtrSize() const {return int(TxtrWidth)*int(TxtrHeight);}
 	GLuint TxtrID;
 	uint32 DispList;
 	static std::set<FontSpecifier*> *m_font_registry;
