@@ -429,11 +429,11 @@ bool load_quick_save_dialog(FileSpecifier& saved_game)
     w_tiny_button *rename_w = new w_tiny_button("RENAME", dialog_rename, &d);
     rename_w->set_identifier(iDIALOG_RENAME_W);
     mini_button_placer->dual_add(rename_w, d);
-#ifndef MAC_APP_STORE
-    w_tiny_button *export_w = new w_tiny_button("EXPORT", dialog_export, &d);
-    export_w->set_identifier(iDIALOG_EXPORT_W);
-    mini_button_placer->dual_add(export_w, d);
-#endif
+	if (!PlatformIsMacAppStore()) {
+    	w_tiny_button *export_w = new w_tiny_button("EXPORT", dialog_export, &d);
+    	export_w->set_identifier(iDIALOG_EXPORT_W);
+    	mini_button_placer->dual_add(export_w, d);
+	}
     w_tiny_button *delete_w = new w_tiny_button("DELETE", dialog_delete, &d);
     delete_w->set_identifier(iDIALOG_DELETE_W);
     mini_button_placer->dual_add(delete_w, d);
@@ -448,10 +448,10 @@ bool load_quick_save_dialog(FileSpecifier& saved_game)
     placer->add(new w_spacer, true);
 
     horizontal_placer* button_placer = new horizontal_placer;
-#ifndef MAC_APP_STORE
-    w_button* other_w = new w_button("LOAD OTHER", dialog_exit_other, &d);
-    button_placer->dual_add(other_w, d);
-#endif
+	if (!PlatformIsMacAppStore()) {
+    	w_button* other_w = new w_button("LOAD OTHER", dialog_exit_other, &d);
+    	button_placer->dual_add(other_w, d);
+	}
     w_button* accept_w = new w_button("LOAD", dialog_ok, &d);
     accept_w->set_identifier(iDIALOG_ACCEPT_W);
     button_placer->dual_add(accept_w, d);
@@ -467,9 +467,8 @@ bool load_quick_save_dialog(FileSpecifier& saved_game)
     {
         rename_w->set_enabled(false);
         delete_w->set_enabled(false);
-#ifndef MAC_APP_STORE
-        export_w->set_enabled(false);
-#endif
+		if (!PlatformIsMacAppStore())
+        	export_w->set_enabled(false);
         accept_w->set_enabled(false);
     }
     
