@@ -2020,7 +2020,7 @@ static bool begin_game(
 						show_cursor(); // JTP: Hidden one way or another :p
 						
 						bool prompt_to_export = false;
-						if (PlatformIsMacAppStore()) {
+						if (!PlatformIsMacAppStore()) {
 							SDL_Keymod m = SDL_GetModState();
 							if ((m & KMOD_ALT) || (m & KMOD_GUI)) prompt_to_export = true;
 						}
