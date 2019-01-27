@@ -429,8 +429,9 @@ bool load_quick_save_dialog(FileSpecifier& saved_game)
     w_tiny_button *rename_w = new w_tiny_button("RENAME", dialog_rename, &d);
     rename_w->set_identifier(iDIALOG_RENAME_W);
     mini_button_placer->dual_add(rename_w, d);
+	w_tiny_button *export_w = nullptr;
 	if (!PlatformIsMacAppStore()) {
-    	w_tiny_button *export_w = new w_tiny_button("EXPORT", dialog_export, &d);
+    	export_w = new w_tiny_button("EXPORT", dialog_export, &d);
     	export_w->set_identifier(iDIALOG_EXPORT_W);
     	mini_button_placer->dual_add(export_w, d);
 	}
