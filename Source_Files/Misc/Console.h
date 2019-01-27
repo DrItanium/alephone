@@ -70,7 +70,7 @@ public:
 			    const std::string& prompt);
 	void deactivate_input(); // like abort, but no callback
 
-	bool input_active() { return m_active; }
+	bool input_active() const { return m_active; }
 	int cursor_position();
 
 	void register_macro(std::string macro, std::string replacement);
