@@ -59,7 +59,7 @@ public:
 	virtual void setupGL(Rasterizer_Shader_Class& Rasterizer);
 
 	virtual void render_tree(void);
-        bool renders_viewer_sprites_in_tree() { return true; }
+    bool renders_viewer_sprites_in_tree() const { return true; }
 
 	TextureManager setupWallTexture(const shape_descriptor& Texture, short transferMode, float pulsate, float wobble, float intensity, float offset, RenderStep renderStep);
 	TextureManager setupSpriteTexture(const rectangle_definition& rect, short type, float offset, RenderStep renderStep);

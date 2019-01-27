@@ -32,7 +32,7 @@ class SW_Texture
 public:
 	SW_Texture() : m_opac_type(0), m_shape_descriptor(0), m_opac_scale(1.0), m_opac_shift(0.0) { }
 	void descriptor(shape_descriptor ShapeDesc) { m_shape_descriptor = ShapeDesc; }
-	int opac_type() { return m_opac_type; }
+	int opac_type() const { return m_opac_type; }
 	void opac_type(int new_opac_type) { m_opac_type = new_opac_type; }
 
 	uint8 *opac_table() { 
