@@ -37,13 +37,13 @@ class Scenario
 public:
 	static Scenario *instance();
 	
-	const string GetName() { return m_name; }
+	const string GetName() const { return m_name; }
 	void SetName(const string name) { m_name = string(name, 0, 31); }
 	
-	const string GetVersion() { return m_version; }
+	const string GetVersion() const { return m_version; }
 	void SetVersion(const string version) { m_version = string(version, 0, 7); }
 
-	const string GetID() { return m_id; }
+	const string GetID() const { return m_id; }
 	void SetID(const string id) { m_id = string(id, 0, 23); }
 	
 	bool IsCompatible(const string);

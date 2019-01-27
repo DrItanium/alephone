@@ -46,7 +46,7 @@ public:
 	void Process();
 
 	// are all the stats written / uploaded?
-	bool Busy() { return busy_; }
+	bool Busy() const { return busy_; }
 
 	void Finish();
 
